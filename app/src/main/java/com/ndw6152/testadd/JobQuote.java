@@ -1,10 +1,8 @@
 package com.ndw6152.testadd;
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
+/*
+  Created by ndw6152 on 5/27/2018.
 
-/**
- * Created by ndw6152 on 5/27/2018.
- *
  "quote": {
      "labor_cost":{
         "breaks":100, "oil change":40
@@ -16,7 +14,6 @@ import java.io.Serializable;
      "comments":"part cost may change by 10%"
  }
  */
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -34,7 +31,7 @@ public class JobQuote {
     @SerializedName("onsite_service_charges")
     double onSiteServiceCharge;
 
-    public JobQuote(ArrayList<ItemCost> laborCostArray, ArrayList<ItemCost> partsCostArray, double onSiteServiceCharge, String comments) {
+    public JobQuote(ArrayList<ListViewItem> laborCostArray, ArrayList<ListViewItem> partsCostArray, double onSiteServiceCharge, String comments) {
         laborCostMap = new Hashtable<>();
         partsCostMap = new Hashtable<>();
 
@@ -43,8 +40,8 @@ public class JobQuote {
         initMaps(laborCostArray, partsCostArray);
     }
 
-    private void initMaps(ArrayList<ItemCost> laborCostArray, ArrayList<ItemCost> partsCostArray) {
-        ItemCost temp;
+    private void initMaps(ArrayList<ListViewItem> laborCostArray, ArrayList<ListViewItem> partsCostArray) {
+        ListViewItem temp;
         for(int i = 0; i < laborCostArray.size(); i++) {
             temp = laborCostArray.get(i);
             laborCostMap.put(temp.itemName, temp.itemCost);

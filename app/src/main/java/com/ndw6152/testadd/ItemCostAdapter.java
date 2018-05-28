@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +19,9 @@ import java.util.ArrayList;
 public class ItemCostAdapter extends BaseAdapter {
     private Context context;
 
-    private ArrayList<ItemCost> itemList;
+    private ArrayList<ListViewItem> itemList;
 
-    public ItemCostAdapter(Context context, ArrayList<ItemCost> arr) {
+    public ItemCostAdapter(Context context, ArrayList<ListViewItem> arr) {
         this.context = context;
         itemList = arr;
 
