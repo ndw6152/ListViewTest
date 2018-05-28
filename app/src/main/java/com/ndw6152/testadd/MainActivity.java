@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
         final EditText editText_onSiteCost = dialogView.findViewById(R.id.editText_onSiteCost);
 
-        final TextView textView_onSiteCost = dialogView.findViewById(R.id.textView_onSiteCost);
+        final TextView textView_onSiteCost = findViewById(R.id.textView_onSiteCost);
 
         dialogBuilder.setMessage("Enter on-site service charge:");
         dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
