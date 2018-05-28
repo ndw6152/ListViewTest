@@ -63,13 +63,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public void showAddServiceChargeDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.onsitecharge_dialog, null);
         dialogBuilder.setView(dialogView);
+        dialogBuilder.setCancelable(false);
         final EditText editText_onSiteCost = dialogView.findViewById(R.id.editText_onSiteCost);
 
         final TextView textView_onSiteCost = findViewById(R.id.textView_onSiteCost);
@@ -91,12 +90,38 @@ public class MainActivity extends AppCompatActivity {
         b.show();
     }
 
+    public void showAddItemDialog(final ArrayList<ListViewItem> array, final ItemCostAdapter adapter) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.listview_item_dialog, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setCancelable(false);
+        final EditText editTextName = dialogView.findViewById(R.id.editText_item_name);
+        final EditText editTextCost = dialogView.findViewById(R.id.editText_item_cost);
+
+
+        dialogBuilder.setMessage("Enter on-site service charge:");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                array.add(new ListViewItem(editTextName.getText().toString(), Double.parseDouble(editTextCost.getText().toString())));
+                adapter.notifyDataSetChanged();
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
     public void showAddCommentsDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.comments_dialog, null);
         dialogBuilder.setView(dialogView);
-
+        dialogBuilder.setCancelable(false);
         final EditText editText = dialogView.findViewById(R.id.editText_comments);
         final TextView textView_comments = findViewById(R.id.textView_comments);
         dialogBuilder.setMessage("Enter on-site service charge:");
@@ -149,13 +174,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.action_add_labor_cost:
-                        laborCostArray.add(new ListViewItem("Labor" + count, count++));
-                        laborCostAdapter.notifyDataSetChanged();
+                        showAddItemDialog(laborCostArray, laborCostAdapter);
+
                         break;
 
                     case R.id.action_add_parts_cost:
-                        partsCostArray.add(new ListViewItem("Parts" + count, count++));
-                        partsCostAdapter.notifyDataSetChanged();
+                        //partsCostArray.add(new ListViewItem("Parts" + count, count++));
+                        showAddItemDialog(partsCostArray, partsCostAdapter);
                         break;
 
                     case R.id.action_add_service_cost:
